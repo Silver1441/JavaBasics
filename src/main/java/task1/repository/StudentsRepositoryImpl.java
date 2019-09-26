@@ -6,26 +6,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentsRepositoryImpl implements StudentRepository {
-    List<Student> list;
+    private List<Student> list = new ArrayList<>();
 
+    @Override
     public void addStudent(Student student){
-        if(student!=null) {
             list.add(student);
-        }
     }
 
+    @Override
+    public List<Student> getStudentList() {
+        return list;
+    }
+
+    @Override
     public Student getStudentById(int id) {
-        Student student = null;
-        for (Student i : list)
-        {
-            if(i.getID() == id) {
-                student = i;
-            }
-        }
-        return student;
+        return list.stream()
+                .filter((student) -> student.getID() == id)
+                .findFirst().orElse(new Student(0)); //Null object pattern here
     }
 
-    /*private Student findStudentById(int id) {
-
-    }*/
 }

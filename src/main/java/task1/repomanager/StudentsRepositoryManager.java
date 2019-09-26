@@ -1,11 +1,11 @@
-package task1.repository;
+package task1.repomanager;
 
 import task1.entity.Student;
 
 import java.util.List;
 
-public interface StudentRepository {
-    void addStudent(Student student);
+public interface StudentsRepositoryManager {
+    boolean addStudent(Student student);
     List<Student> getStudentList();
     Student getStudentById(int id);
 }
