@@ -15,10 +15,10 @@ public class StudentsRepositoryManagerImpl implements StudentsRepositoryManager 
 
     @Override
     public boolean addStudent(Student student) {
-        if(student != null) {
+        if (student != null) {
             repository.addStudent(student);
             return true;
-        } else{
+        } else {
             return false;
         }
     }
@@ -34,5 +34,5 @@ public class StudentsRepositoryManagerImpl implements StudentsRepositoryManager 
     public Student getStudentById(int id) {
         return repository.getStudentById(id);
     }
-    
+
 }

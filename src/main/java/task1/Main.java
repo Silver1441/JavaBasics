@@ -3,11 +3,40 @@ package task1;
 import task1.entity.Student;
 import task1.repository.StudentRepository;
 import task1.repository.StudentsRepositoryImpl;
+import task1.service.builder.IdBuilder;
 
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("-Test start-");
+
+        System.out.println(IdBuilder.getNewId());
+        System.out.println(IdBuilder.getNewId());
+        System.out.println(IdBuilder.getNewId());
+        System.out.println(IdBuilder.getNewId());
+        System.out.println(IdBuilder.getNewId());
+        System.out.println(IdBuilder.getNewId());
+        System.out.println(IdBuilder.getNewId());
+        System.out.println(IdBuilder.getNewId());
+        System.out.println(IdBuilder.getNewId());
+        System.out.println(IdBuilder.getNewId());
+        System.out.println(IdBuilder.getNewId());
+        System.out.println(IdBuilder.getNewId());
+        System.out.println(IdBuilder.getNewId());
+        System.out.println(IdBuilder.getNewId());
+        System.out.println(IdBuilder.getNewId());
+        System.out.println(IdBuilder.getNewId());
+        System.out.println(IdBuilder.getNewId());
+
+
+
+
+
+
+
+
+
+
+        /*System.out.println("-Test start-");
 
         Student st1 = new Student(1);
         st1.setName("Vasia");
@@ -26,7 +55,7 @@ public class Main {
         Student sTest = repo.getStudentById(2);
         System.out.println(sTest.getName());
 
-        System.out.println("-Test end-");
+        System.out.println("-Test end-");*/
 
     }
 }

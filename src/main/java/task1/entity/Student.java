@@ -10,6 +10,8 @@ public class Student {
     private String name;
     @Setter
     private String surname;
+    @Setter
+    private int enrolledCurriculumId;
 
     public Student(int ID) {
         this.ID = ID;
