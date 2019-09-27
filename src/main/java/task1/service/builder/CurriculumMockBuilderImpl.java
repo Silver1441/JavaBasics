@@ -23,12 +23,12 @@ public class CurriculumMockBuilderImpl implements CurriculumMockBuilder {
                 LocalDate.of(2019, 9, 25));
 
         List<Course> frontCourses = new LinkedList<>();
-        javaCourses.add(new Course("WEB basics", 8));
-        javaCourses.add(new Course("GIT", 8));
-        javaCourses.add(new Course("HTTP/CSS", 32));
-        javaCourses.add(new Course("Java Script", 48));
-        javaCourses.add(new Course("Databases", 16));
-        javaCourses.add(new Course("React/Angular", 40));
+        frontCourses.add(new Course("WEB basics", 8));
+        frontCourses.add(new Course("GIT", 8));
+        frontCourses.add(new Course("HTTP/CSS", 32));
+        frontCourses.add(new Course("Java Script", 48));
+        frontCourses.add(new Course("Databases", 16));
+        frontCourses.add(new Course("React/Angular", 40));
 
         Curriculum frontCurriculum = new Curriculum(IdBuilder.getNewId(), "Front-end development", frontCourses,
                 LocalDate.of(2019, 9, 23));
