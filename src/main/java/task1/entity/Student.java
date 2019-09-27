@@ -12,6 +12,8 @@ public class Student {
     private String surname;
     @Setter
     private int enrolledCurriculumId;
+    @Setter
+    private Marks marks;
 
     public Student(int ID) {
         this.ID = ID;

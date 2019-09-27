@@ -6,10 +6,10 @@ import task1.repository.StudentRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class StudentsRepositoryManagerImpl implements StudentsRepositoryManager {
+public class StudentRepositoryManagerImpl implements StudentRepositoryManager {
     private StudentRepository repository;
 
-    public StudentsRepositoryManagerImpl(StudentRepository repository) {
+    public StudentRepositoryManagerImpl(StudentRepository repository) {
         this.repository = repository;
     }
 

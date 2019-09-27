@@ -5,27 +5,14 @@ import task1.repository.StudentRepository;
 import task1.repository.StudentsRepositoryImpl;
 import task1.service.builder.IdBuilder;
 
+import java.time.LocalDate;
+
 public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println(IdBuilder.getNewId());
-        System.out.println(IdBuilder.getNewId());
-        System.out.println(IdBuilder.getNewId());
-        System.out.println(IdBuilder.getNewId());
-        System.out.println(IdBuilder.getNewId());
-        System.out.println(IdBuilder.getNewId());
-        System.out.println(IdBuilder.getNewId());
-        System.out.println(IdBuilder.getNewId());
-        System.out.println(IdBuilder.getNewId());
-        System.out.println(IdBuilder.getNewId());
-        System.out.println(IdBuilder.getNewId());
-        System.out.println(IdBuilder.getNewId());
-        System.out.println(IdBuilder.getNewId());
-        System.out.println(IdBuilder.getNewId());
-        System.out.println(IdBuilder.getNewId());
-        System.out.println(IdBuilder.getNewId());
-        System.out.println(IdBuilder.getNewId());
+        LocalDate date = LocalDate.of(1914, 7, 28);
+        System.out.println(date);
 
 
 
