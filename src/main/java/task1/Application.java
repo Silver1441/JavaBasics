@@ -12,15 +12,9 @@ import task1.service.demo.DemoDispatcherImpl;
 public class Application {
 
     public static void main(String[] args) {
-        /*DemoDispatcher demo = new DemoDispatcherImpl();
-        demo.makeDemo();*/
-        CurriculumRepository repo = new CurriculumRepositoryImpl();
-        CurriculumRepositoryManager manager = new CurriculumRepositoryManagerImpl(repo);
-        try {
-            manager.getCurriculumById(5).ifPresent(user -> System.out.println(user.getName()));
-        } catch (NoEntityException e) {
-            e.printStackTrace();
-        }
+        DemoDispatcher demo = new DemoDispatcherImpl();
+        demo.makeDemo();
+
         System.out.println("Log: end");
     }
 }

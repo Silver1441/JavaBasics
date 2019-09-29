@@ -11,6 +11,8 @@ public class Marks {
     final private int STUDENT_ID;
     final private int CURRICULUM_ID;
     @Setter
+    private int numberOfMarks;
+    @Setter
     private List<Integer> markList;
 
     public Marks(int studentId, int curriculumId) {
@@ -18,4 +20,6 @@ public class Marks {
         this.CURRICULUM_ID = curriculumId;
         markList = new ArrayList<>();
     }
+
+
 }
