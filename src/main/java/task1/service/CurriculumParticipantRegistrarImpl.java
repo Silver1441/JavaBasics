@@ -18,12 +18,11 @@ public class CurriculumParticipantRegistrarImpl implements CurriculumParticipant
     }
 
     private int numberOfMarksCalculator(Curriculum curriculum) {
-        int fullLenght = 0;
+        int fullLength = 0;
         List<Course> courses = curriculum.getCourses();
         for (Course course : courses) {
-            fullLenght += course.getDuration();
+            fullLength += course.getDuration();
         }
-        int numberOfMarks = (int) Math.ceil(fullLenght / WORKING_HOURS_PER_DAY);
-        return numberOfMarks;
+        return (int) Math.ceil(fullLength / getWorkingHoursPerDay());
     }
 }

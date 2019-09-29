@@ -13,7 +13,7 @@ public class Marks {
     @Setter
     private int numberOfMarks;
     @Setter
-    private List<Integer> markList;
+    private List<Double> markList;
 
     public Marks(int studentId, int curriculumId) {
         this.STUDENT_ID = studentId;
