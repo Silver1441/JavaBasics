@@ -1,9 +1,11 @@
 package task1.repomanager;
 
 import task1.entity.Student;
+import task1.exception.NoEntityException;
 import task1.repository.StudentRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class StudentRepositoryManagerImpl implements StudentRepositoryManager {
@@ -25,14 +27,12 @@ public class StudentRepositoryManagerImpl implements StudentRepositoryManager {
 
     @Override
     public List<Student> getStudentList() {
-        return repository.getStudentList().stream()
-                .filter((student) -> student.getID() != 0) //removing potential null objects
-                .collect(Collectors.toList());
+        return repository.getStudentList();
     }
 
     @Override
-    public Student getStudentById(int id) {
-        return repository.getStudentById(id);
+    public Optional<Student> getStudentById(int id) throws NoEntityException {
+        return Optional.ofNullable(repository.getStudentById(id));
     }
 
 }

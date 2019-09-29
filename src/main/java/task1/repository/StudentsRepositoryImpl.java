@@ -1,6 +1,7 @@
 package task1.repository;
 
 import task1.entity.Student;
+import task1.exception.NoEntityException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +20,10 @@ public class StudentsRepositoryImpl implements StudentRepository {
     }
 
     @Override
-    public Student getStudentById(int id) {
+    public Student getStudentById(int id) throws NoEntityException {
         return list.stream()
                 .filter((student) -> student.getID() == id)
-                .findFirst().orElse(new Student(0)); //Null object pattern here
+                .findFirst().orElseThrow(() -> new NoEntityException(id));
     }
 
 }

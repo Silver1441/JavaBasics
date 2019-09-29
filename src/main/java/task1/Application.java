@@ -17,9 +17,9 @@ public class Application {
         CurriculumRepository repo = new CurriculumRepositoryImpl();
         CurriculumRepositoryManager manager = new CurriculumRepositoryManagerImpl(repo);
         try {
-            System.out.println(manager.getCurriculumById(3).getName());
+            manager.getCurriculumById(5).ifPresent(user -> System.out.println(user.getName()));
         } catch (NoEntityException e) {
-            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
         System.out.println("Log: end");
     }
