@@ -1,6 +1,7 @@
 package task1.repomanager;
 
 import task1.entity.Curriculum;
+import task1.exception.NoEntityException;
 import task1.repository.CurriculumRepository;
 
 public class CurriculumRepositoryManagerImpl implements CurriculumRepositoryManager {
@@ -18,5 +19,10 @@ public class CurriculumRepositoryManagerImpl implements CurriculumRepositoryMana
         } else {
             return false;
         }
+    }
+
+    @Override
+    public Curriculum getCurriculumById(int id) throws NoEntityException {
+        return repository.getCurriculumById(id);
     }
 }
