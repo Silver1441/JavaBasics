@@ -7,7 +7,7 @@ public class WrongMarkException extends Exception {
     private String message;
 
     public WrongMarkException(Student student, Curriculum curriculum, double mark) {
-        message = "Can't add mark: " + mark + " to the student with ID: " + student.getID() +
+        message = "Can't add mark: \"" + mark + "\" to the student with ID: " + student.getID() +
                 " from the curriculum with ID: " + curriculum.getID();
     }
 

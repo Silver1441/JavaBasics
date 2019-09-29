@@ -11,6 +11,7 @@ import static task1.support.Configurations.*;
 
 public class CurriculumParticipantRegistrarImpl implements CurriculumParticipantRegistrar {
 
+    @Override
     public void registerStudent(Student student, Curriculum curriculum) {
         student.setEnrolledCurriculumId(curriculum.getID());
         student.setMarks(new Marks(student.getID(), curriculum.getID()));
