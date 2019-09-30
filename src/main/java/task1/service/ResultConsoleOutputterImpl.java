@@ -71,6 +71,7 @@ public class ResultConsoleOutputterImpl implements ResultOutputter {
 
         showSortedByAverageMarkList(studentRepositoryManager);
         showPromisingStudentList(studentRepositoryManager);
+        showSortedByDaysLeftList(studentRepositoryManager);
     }
 
     private void showSortedByAverageMarkList(StudentRepositoryManager studentRepositoryManager) {
@@ -96,5 +97,22 @@ public class ResultConsoleOutputterImpl implements ResultOutputter {
         studentList.stream()
                 .filter((student) -> student.isPromising())
                 .forEach((student) -> System.out.println(student.getName() + " " + student.getSurname()));
+    }
+
+    private void showSortedByDaysLeftList(StudentRepositoryManager studentRepositoryManager) {
+        Map<Student, Integer> studentSortedList = new HashMap<>();
+        List<Student> studentList = studentRepositoryManager.getStudentList();
+
+        studentList.forEach((student) -> studentSortedList.put(student,
+                (student.getMarks().getNumberOfMarks() - student.getMarks().getMarkList().size())));
+
+        System.out.println("\n-------Student list sorted by days left:");
+
+        studentSortedList.entrySet().stream()
+                .sorted(Map.Entry.<Student, Integer>comparingByValue())
+                .forEach((student) ->
+                        System.out.println(student.getKey().getName() + " " + student.getKey().getSurname()
+                                + ":  " +
+                                student.getValue() + " days left;"));
     }
 }
