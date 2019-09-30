@@ -70,21 +70,31 @@ public class ResultConsoleOutputterImpl implements ResultOutputter {
         }
 
         showSortedByAverageMarkList(studentRepositoryManager);
+        showPromisingStudentList(studentRepositoryManager);
     }
 
     private void showSortedByAverageMarkList(StudentRepositoryManager studentRepositoryManager) {
         Map<Student, Double> studentSortedList = new HashMap<>();
         List<Student> studentList = studentRepositoryManager.getStudentList();
-        for (Student student : studentList) {
-            studentSortedList.put(student,
-                    averageDoubleCalculator.calculateAverageDouble(student.getMarks().getMarkList()));
-        }
 
-        System.out.println("-------Student list sorted by average mark:");
+        studentList.forEach((student) -> studentSortedList.put(student,
+                averageDoubleCalculator.calculateAverageDouble(student.getMarks().getMarkList())));
+
+        System.out.println("\n-------Student list sorted by average mark:");
 
         studentSortedList.entrySet().stream()
                 .sorted(Map.Entry.<Student, Double>comparingByValue().reversed())
-                .forEach((value) -> System.out.println(value.getKey().getName() + " " + value.getKey().getSurname() +
-                        ": " + value.getValue()));
+                .forEach((student) -> System.out.println(student.getKey().getName() + " "
+                        + student.getKey().getSurname() + ": " + student.getValue()));
+    }
+
+    private void showPromisingStudentList(StudentRepositoryManager studentRepositoryManager) {
+        List<Student> studentList = studentRepositoryManager.getStudentList();
+
+        System.out.println("\n-------Promising student list:");
+
+        studentList.stream()
+                .filter((student) -> student.isPromising())
+                .forEach((student) -> System.out.println(student.getName() + " " + student.getSurname()));
     }
 }
