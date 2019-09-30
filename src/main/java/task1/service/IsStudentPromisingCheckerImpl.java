@@ -25,6 +25,7 @@ public class IsStudentPromisingCheckerImpl implements IsStudentPromisingChecker 
         } else if (potentialAverageMark >= getRequiredAverageMark()) {
             return true;
         } else {
+            student.setPromising(false);
             return false;
         }
 

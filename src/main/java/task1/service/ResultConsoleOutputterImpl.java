@@ -9,8 +9,7 @@ import task1.repomanager.CurriculumRepositoryManager;
 import task1.repomanager.StudentRepositoryManager;
 import task1.support.AverageDoubleCalculator;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 public class ResultConsoleOutputterImpl implements ResultOutputter {
 
@@ -52,12 +51,13 @@ public class ResultConsoleOutputterImpl implements ResultOutputter {
             System.out.println("   ------------------------------------");
             System.out.println("   Course list:");
             for (Course course : courses) {
-                System.out.println("    -" + course.getName() + ", number of hours: " + course.getDuration());
+                System.out.println("    -" + course.getName() + ", number of hours: <" +
+                        course.getDuration() + " hours>;");
             }
 
             System.out.println("   ------------------------------------");
             System.out.print("   Marks:     ");
-            System.out.print("   { ");
+            System.out.print("   {  ");
             for (Double mark : marks.getMarkList()) {
                 System.out.print(mark + ";  ");
             }
@@ -69,5 +69,22 @@ public class ResultConsoleOutputterImpl implements ResultOutputter {
             System.out.println("\n");
         }
 
+        showSortedByAverageMarkList(studentRepositoryManager);
+    }
+
+    private void showSortedByAverageMarkList(StudentRepositoryManager studentRepositoryManager) {
+        Map<Student, Double> studentSortedList = new HashMap<>();
+        List<Student> studentList = studentRepositoryManager.getStudentList();
+        for (Student student : studentList) {
+            studentSortedList.put(student,
+                    averageDoubleCalculator.calculateAverageDouble(student.getMarks().getMarkList()));
+        }
+
+        System.out.println("-------Student list sorted by average mark:");
+
+        studentSortedList.entrySet().stream()
+                .sorted(Map.Entry.<Student, Double>comparingByValue().reversed())
+                .forEach((value) -> System.out.println(value.getKey().getName() + " " + value.getKey().getSurname() +
+                        ": " + value.getValue()));
     }
 }
