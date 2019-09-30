@@ -13,14 +13,14 @@ public class CurriculumMockBuilderImpl implements CurriculumMockBuilder {
     @Override
     public CurriculumRepositoryManager buildCurriculums(CurriculumRepositoryManager manager) {
         List<Course> javaCourses = new LinkedList<>();
-        javaCourses.add(new Course("JKD, IDE", 8));
+        javaCourses.add(new Course("JKD/IDE", 8));
         javaCourses.add(new Course("GIT", 8));
         javaCourses.add(new Course("Java basics", 32));
         javaCourses.add(new Course("Java advanced", 48));
         javaCourses.add(new Course("Databases", 16));
         javaCourses.add(new Course("Spring", 40));
         Curriculum javaCurriculum = new Curriculum(IdBuilder.getNewId(), "Java Spring", javaCourses,
-                LocalDate.of(2019, 9, 25));
+                LocalDate.of(2019, 9, 12));
 
         List<Course> frontCourses = new LinkedList<>();
         frontCourses.add(new Course("WEB basics", 8));

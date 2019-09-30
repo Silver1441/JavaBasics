@@ -14,8 +14,11 @@ public class Student {
     private int enrolledCurriculumId;
     @Setter
     private Marks marks;
+    @Setter
+    private boolean isPromising;
 
     public Student(int ID) {
         this.ID = ID;
+        isPromising = true;
     }
 }
