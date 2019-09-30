@@ -109,7 +109,7 @@ public class ResultConsoleOutputterImpl implements ResultOutputter {
         System.out.println("\n-------Student list sorted by days left:");
 
         studentSortedList.entrySet().stream()
-                .sorted(Map.Entry.<Student, Integer>comparingByValue())
+                .sorted(Map.Entry.comparingByValue())
                 .forEach((student) ->
                         System.out.println(student.getKey().getName() + " " + student.getKey().getSurname()
                                 + ":  " +
