@@ -10,10 +10,7 @@ import task1.repository.CurriculumRepository;
 import task1.repository.CurriculumRepositoryImpl;
 import task1.repository.StudentRepository;
 import task1.repository.StudentsRepositoryImpl;
-import task1.service.CurriculumParticipantRegistrar;
-import task1.service.CurriculumParticipantRegistrarImpl;
-import task1.service.MarkGrader;
-import task1.service.MarkGraderImpl;
+import task1.service.*;
 import task1.service.builder.*;
 
 import java.util.List;
@@ -35,6 +32,8 @@ public class DemoDispatcherImpl implements DemoDispatcher {
         CurriculumParticipantRegistrar curriculumParticipantRegistrar = new CurriculumParticipantRegistrarImpl();
         MarkGrader markGrader = new MarkGraderImpl();
         MockMarksBuilder mockMarksBuilder = new MockMarksBuilderImpl();
+
+        ResultOutputter resultOutputter = new ResultConsoleOutputterImpl();
         // -----Beans creation section
 
         curriculumRepositoryManager = curriculumMockBuilder.buildCurriculums(curriculumRepositoryManager);
@@ -53,11 +52,7 @@ public class DemoDispatcherImpl implements DemoDispatcher {
             mockMarksBuilder.buildMockMarks(students.get(i), curriculums.get(1), markGrader);
         }
 
-
-
-
-        System.out.println("Log: DemoDispatcher end");
-
+        resultOutputter.showResultInConsole(studentRepositoryManager, curriculumRepositoryManager);
     }
 
 
