@@ -1,18 +1,18 @@
 package task2;
 
-import static task2.support.PriorityAssigner.getPriority;
-
 import task2.service.StringParserCalculator;
-
-import java.util.ArrayList;
-import java.util.List;
+import task2.exception.WrongInputException;
 
 public class Application {
     public static void main(String[] args) {
 
         StringParserCalculator calc = new StringParserCalculator();
-        String input = "8.7 - [(-1,0) / (2*2)] / 2";
+        String input = "-8.7 - [(-1,0) / (2*2,0)] /    (2)";
 
-        System.out.println(calc.makeCalculation(input));
+        try {
+            System.out.println(calc.makeCalculation(input));
+        } catch (WrongInputException e) {
+            e.printStackTrace();
+        }
     }
 }

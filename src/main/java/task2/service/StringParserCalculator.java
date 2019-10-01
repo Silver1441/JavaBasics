@@ -1,5 +1,7 @@
 package task2.service;
 
+import task2.exception.WrongInputException;
+
 import static task2.support.PriorityAssigner.getPriority;
 import static task2.support.inputTrimmer.trimTheInput;
 import static task2.support.SeparatedExpressionsBuilder.buildSeparatedExpressions;
@@ -7,6 +9,7 @@ import static task2.service.operation.Summarizer.sumTwoExpressions;
 import static task2.service.operation.Multiplier.multiplyTwoExpressions;
 import static task2.service.operation.Subtractor.subtractTwoExpressions;
 import static task2.service.operation.Divider.divideTwoExpressions;
+import static task2.support.InputValidator.validateInput;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -20,8 +23,9 @@ public class StringParserCalculator {
     private List<String> separatedExpressionsList;
 
 
-    public double makeCalculation(String input) {
+    public double makeCalculation(String input) throws WrongInputException {
         input = trimTheInput(input);
+        validateInput(input);
         separatedExpressionsList = buildSeparatedExpressions(input);
         buildStack();
 
@@ -86,19 +90,35 @@ public class StringParserCalculator {
         }
     }
 
-    private void parseExpression(String expression) {
+    private void parseExpression(String expression) throws WrongInputException {
         switch (expression) {
             case ("*"):
-                calculationStack.push(multiplyTwoExpressions(calculationStack.poll(), calculationStack.poll()));
+                if (calculationStack.size() >= 2){
+                    calculationStack.push(multiplyTwoExpressions(calculationStack.poll(), calculationStack.poll()));
+                } else {
+                    throw new WrongInputException("excess operator");
+                }
                 break;
             case ("/"):
-                calculationStack.push(divideTwoExpressions(calculationStack.poll(), calculationStack.poll()));
+                if (calculationStack.size() >= 2){
+                    calculationStack.push(divideTwoExpressions(calculationStack.poll(), calculationStack.poll()));
+                } else {
+                    throw new WrongInputException("excess operator");
+                }
                 break;
             case ("+"):
-                calculationStack.push(sumTwoExpressions(calculationStack.poll(), calculationStack.poll()));
+                if (calculationStack.size() >= 2){
+                    calculationStack.push(sumTwoExpressions(calculationStack.poll(), calculationStack.poll()));
+                } else {
+                    throw new WrongInputException("excess operator");
+                }
                 break;
             case ("-"):
-                calculationStack.push(subtractTwoExpressions(calculationStack.poll(), calculationStack.poll()));
+                if (calculationStack.size() >= 2){
+                    calculationStack.push(subtractTwoExpressions(calculationStack.poll(), calculationStack.poll()));
+                } else {
+                    throw new WrongInputException("excess operator");
+                }
                 break;
             default:
                 expression = expression
