@@ -10,10 +10,8 @@ import java.util.List;
 public class Application {
     public static void main(String[] args) {
 
-        System.out.println(getPriority(")"));
-
-//        StringParserCalculator calc = new StringParserCalculator();
-//        calc.makeCalculation("20*2/432 [4 + 3]");
+        StringParserCalculator calc = new StringParserCalculator();
+        calc.makeCalculation("1 + 2 * 3 - 4");
 //        int test1 = 1;
 //        int test2 = - -2;
 //        int test3 = test1 + test2;
