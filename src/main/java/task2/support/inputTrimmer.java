@@ -5,6 +5,8 @@ public class inputTrimmer {
         return input
                 .replaceAll("\\s", "")
                 .replaceAll("]", ")")
-                .replaceAll("\\[", "(");
+                .replaceAll("\\[", "(")
+                .replaceAll(",", ".");
+
     }
 }

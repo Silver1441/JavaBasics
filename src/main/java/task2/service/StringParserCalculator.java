@@ -5,11 +5,8 @@ import static task2.support.inputTrimmer.trimTheInput;
 import static task2.support.SeparatedExpressionsBuilder.buildSeparatedExpressions;
 
 import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.Deque;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 public class StringParserCalculator {
@@ -20,7 +17,6 @@ public class StringParserCalculator {
     public void makeCalculation(String input) {
         input = trimTheInput(input);
         separatedExpressionsList = buildSeparatedExpressions(input);
-
         buildStack();
 
         System.out.println("Log: calculation end");

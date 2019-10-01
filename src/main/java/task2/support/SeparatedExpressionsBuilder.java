@@ -9,7 +9,7 @@ public class SeparatedExpressionsBuilder {
     public static List<String> buildSeparatedExpressions(String input) {
         List<String> separatedExpressionsList = new ArrayList<>();
 
-        Pattern pattern = Pattern.compile("\\d+|\\+|\\*|\\-|\\/|\\)|\\("); //TODO: make patter builder class(?)
+        Pattern pattern = Pattern.compile("\\d+(\\.?\\d*)|\\+|\\*|\\-|\\/|\\)|\\("); //TODO: make patter builder class(?)
         Matcher matcher = pattern.matcher(input);
 
         while (matcher.find()) {
