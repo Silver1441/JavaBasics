@@ -92,6 +92,9 @@ public class StringParserCalculator {
                 calculationStack.push(subtractTwoExpressions(calculationStack.poll(), calculationStack.poll()));
                 break;
             default:
+                expression = expression
+                        .replaceAll("\\(", "")
+                        .replaceAll("\\)", "");
                 calculationStack.push(Double.parseDouble(expression));
                 break;
         }
