@@ -3,6 +3,8 @@ package task2.service;
 import static task2.support.PriorityAssigner.getPriority;
 import static task2.support.inputTrimmer.trimTheInput;
 import static task2.support.SeparatedExpressionsBuilder.buildSeparatedExpressions;
+import static task2.service.operation.Summarizer.sumTwoExpressions;
+import static task2.service.operation.Multiplier.multiplyTwoExpressions;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -10,14 +12,20 @@ import java.util.List;
 
 
 public class StringParserCalculator {
-    private Deque<String> stack = new ArrayDeque<>();
+    private Deque<String> rpnStack = new ArrayDeque<>();
     private Deque<String> operatorsTemporalStack = new ArrayDeque<>();
+    private Deque<Double> calculationStack = new ArrayDeque<>();
     private List<String> separatedExpressionsList;
+
 
     public void makeCalculation(String input) {
         input = trimTheInput(input);
         separatedExpressionsList = buildSeparatedExpressions(input);
         buildStack();
+
+        while (!rpnStack.isEmpty()) { //current work
+            parseExpression(rpnStack.pollLast());
+        } //current work
 
         System.out.println("Log: calculation end");
     }
@@ -43,7 +51,7 @@ public class StringParserCalculator {
                 }
                 break;
             default:
-                stack.push(expression);
+                rpnStack.push(expression);
                 break;
         }
     }
@@ -55,17 +63,33 @@ public class StringParserCalculator {
         if (currentExpression > previousExpression) {
             operatorsTemporalStack.addFirst(expression);
         } else {
-            stack.push(operatorsTemporalStack.poll());
+            rpnStack.push(operatorsTemporalStack.poll());
             allocateExpression(expression);
         }
 
     }
 
     private void cleanOperatorsTemporalStack() {
-        while(!operatorsTemporalStack.isEmpty()) {
-            stack.push(operatorsTemporalStack.poll());
+        while (!operatorsTemporalStack.isEmpty()) {
+            rpnStack.push(operatorsTemporalStack.poll());
         }
+    }
 
+    private void parseExpression(String expression) {
+        switch (expression) {
+            case ("*"):
+                calculationStack.push(multiplyTwoExpressions(calculationStack.poll(), calculationStack.poll()));
+                break;
+            case ("/"):
+            case ("+"):
+                calculationStack.push(sumTwoExpressions(calculationStack.poll(), calculationStack.poll()));
+                break;
+            case ("-"):
+                break;
+            default:
+                calculationStack.push(Double.parseDouble(expression));
+                break;
+        }
     }
 
 }
