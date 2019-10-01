@@ -1,5 +1,7 @@
 package task2.service;
 
+import static task2.support.PriorityAssigner.getPriority;
+
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Deque;
@@ -9,17 +11,17 @@ import java.util.regex.Pattern;
 
 
 public class StringParserCalculator {
-    List<String> separatedExpressionsList;  //Contains unformatted expression in their input order
-    Deque<String> stack = new ArrayDeque<>();  //Contains expression formatted in RPN
-    Deque<String> operatorsStack = new ArrayDeque<>();
+    private Deque<String> stack = new ArrayDeque<>();  //Contains expression formatted in RPN
+    private Deque<String> operatorsTemporalStack = new ArrayDeque<>();
 
     public void makeCalculation(String input) {
 
         input = trimTheInput(input);
-        separatedExpressionsList = buildSeparatedExpressions(input);
+        //Contains unformatted expression in their input order
+        List<String> separatedExpressionsList = buildSeparatedExpressions(input);
 
         for (String expression : separatedExpressionsList) {
-            this.allocateExpression(expression);  //TODO: make a stream here(?)
+            this.allocateExpression(expression);
         }
 
         System.out.println("Log: calculation end");
@@ -41,7 +43,7 @@ public class StringParserCalculator {
         Matcher matcher = pattern.matcher(input);
 
         while (matcher.find()) {
-            separatedExpressionsList.add(input.substring(matcher.start(), matcher.end())); //TODO: make a stream here(?)
+            separatedExpressionsList.add(input.substring(matcher.start(), matcher.end()));
         }
         return separatedExpressionsList;
     }
@@ -50,7 +52,14 @@ public class StringParserCalculator {
     private void allocateExpression(String expression) {
         switch (expression) {
             case ("*"):
-
+            case ("/"):
+            case ("+"):
+            case ("-"):
+                if (operatorsTemporalStack.isEmpty()) {
+                    operatorsTemporalStack.addFirst(expression);
+                } else {
+                    checkPriorityAndAllocate(expression);
+                }
                 break;
             default:
                 stack.push(expression);
@@ -59,13 +68,17 @@ public class StringParserCalculator {
     }
 
 
-    private void checkPriority(String expression) {
-        operatorsStack.poll();
+    private void checkPriorityAndAllocate(String expression) {
+        int currentExpression = getPriority(expression);
+        int previousExpression = getPriority(operatorsTemporalStack.peek());
+
+        if (currentExpression > previousExpression) {
+            operatorsTemporalStack.addFirst(expression);
+        } else {
+            stack.push(operatorsTemporalStack.poll());
+            allocateExpression(expression);
+        }
+
     }
 
 }
-
-
-//StringBuilder expression = new StringBuilder(input);
-
-//Deque<String> stack = new ArrayDeque<>();
