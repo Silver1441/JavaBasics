@@ -20,16 +20,16 @@ public class StringParserCalculator {
     private List<String> separatedExpressionsList;
 
 
-    public void makeCalculation(String input) {
+    public double makeCalculation(String input) {
         input = trimTheInput(input);
         separatedExpressionsList = buildSeparatedExpressions(input);
         buildStack();
 
-        while (!rpnStack.isEmpty()) { //current work
+        while (!rpnStack.isEmpty()) {
             parseExpression(rpnStack.pollLast());
-        } //current work
+        }
 
-        System.out.println(calculationStack.pollLast());
+        return calculationStack.pollLast();
     }
 
 
@@ -51,6 +51,15 @@ public class StringParserCalculator {
                 } else {
                     checkPriorityAndAllocate(expression);
                 }
+                break;
+            case ("("):
+                operatorsTemporalStack.push(expression);
+                break;
+            case(")"):
+                while(!operatorsTemporalStack.getFirst().equals("(")) {
+                    rpnStack.push(operatorsTemporalStack.pollFirst());
+                }
+                operatorsTemporalStack.pollFirst();
                 break;
             default:
                 rpnStack.push(expression);

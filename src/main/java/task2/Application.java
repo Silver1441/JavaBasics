@@ -11,12 +11,8 @@ public class Application {
     public static void main(String[] args) {
 
         StringParserCalculator calc = new StringParserCalculator();
-        calc.makeCalculation("-4+6*2+(-2)/2");
+        String input = "8.7 - [(-1,0) / (2*2)] / 2";
 
-//        String str = "(1.)";
-//        double dbl = Double.parseDouble(str);
-//        System.out.println(dbl);
-
-
+        System.out.println(calc.makeCalculation(input));
     }
 }
