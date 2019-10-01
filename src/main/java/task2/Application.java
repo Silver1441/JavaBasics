@@ -11,7 +11,7 @@ public class Application {
     public static void main(String[] args) {
 
         StringParserCalculator calc = new StringParserCalculator();
-        calc.makeCalculation("1.0 + 1,0 + 5 * 4");
+        calc.makeCalculation("4 / 2  * 10 + 5/2");
 //        int test1 = 1;
 //        int test2 = - -2;
 //        int test3 = test1 + test2;

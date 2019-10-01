@@ -5,6 +5,8 @@ import static task2.support.inputTrimmer.trimTheInput;
 import static task2.support.SeparatedExpressionsBuilder.buildSeparatedExpressions;
 import static task2.service.operation.Summarizer.sumTwoExpressions;
 import static task2.service.operation.Multiplier.multiplyTwoExpressions;
+import static task2.service.operation.Subtractor.subtractTwoExpressions;
+import static task2.service.operation.Divider.divideTwoExpressions;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
@@ -27,7 +29,7 @@ public class StringParserCalculator {
             parseExpression(rpnStack.pollLast());
         } //current work
 
-        System.out.println("Log: calculation end");
+        System.out.println(calculationStack.pollLast());
     }
 
 
@@ -81,10 +83,13 @@ public class StringParserCalculator {
                 calculationStack.push(multiplyTwoExpressions(calculationStack.poll(), calculationStack.poll()));
                 break;
             case ("/"):
+                calculationStack.push(divideTwoExpressions(calculationStack.poll(), calculationStack.poll()));
+                break;
             case ("+"):
                 calculationStack.push(sumTwoExpressions(calculationStack.poll(), calculationStack.poll()));
                 break;
             case ("-"):
+                calculationStack.push(subtractTwoExpressions(calculationStack.poll(), calculationStack.poll()));
                 break;
             default:
                 calculationStack.push(Double.parseDouble(expression));
