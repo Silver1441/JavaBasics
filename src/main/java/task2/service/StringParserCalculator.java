@@ -7,13 +7,16 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class StringParserCalculator {
-    public void makeCalculation(String input) {
-        List<String> separatedExpressionsList;  //Contains unformatted expression in their input order
-        Deque<String> stack = new ArrayDeque<>();  //Contains expression formatted in RPN
 
-        input = this.trimTheInput(input);
-        separatedExpressionsList = this.buildSeparatedExpressions(input);
+public class StringParserCalculator {
+    List<String> separatedExpressionsList;  //Contains unformatted expression in their input order
+    Deque<String> stack = new ArrayDeque<>();  //Contains expression formatted in RPN
+    Deque<String> operatorsStack = new ArrayDeque<>();
+
+    public void makeCalculation(String input) {
+
+        input = trimTheInput(input);
+        separatedExpressionsList = buildSeparatedExpressions(input);
 
         for (String expression : separatedExpressionsList) {
             this.allocateExpression(expression);  //TODO: make a stream here(?)
@@ -43,29 +46,24 @@ public class StringParserCalculator {
         return separatedExpressionsList;
     }
 
+
     private void allocateExpression(String expression) {
+        switch (expression) {
+            case ("*"):
 
+                break;
+            default:
+                stack.push(expression);
+                break;
+        }
     }
+
+
+    private void checkPriority(String expression) {
+        operatorsStack.poll();
+    }
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //StringBuilder expression = new StringBuilder(input);
