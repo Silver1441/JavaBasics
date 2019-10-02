@@ -10,10 +10,35 @@ public class InputValidator {
         Pattern notAllowedSymbolPattern = Pattern
                 .compile("[^0-9\\.\\(\\)\\*\\/\\+\\-]+|\\.\\.+|\\D\\.|\\.\\D|^\\.");
         Matcher matcher = notAllowedSymbolPattern.matcher(input);
-        if(matcher.find()) {
+
+        if (matcher.find()) {
             throw new WrongInputException("not allowed symbol: \"" +
                     input.substring(matcher.start(), matcher.end()) + "\"");
         }
+        
+        if (checkClosedParentheses(input) != 0) {
+            throw new WrongInputException(checkClosedParentheses(input) + " open parentheses");
+        }
+    }
 
+    private static int checkClosedParentheses(String input) {
+        int leftParenthesesCounter = 0;
+        int rightParenthesesCounter = 0;
+        Matcher matcher;
+        Pattern leftParentheses = Pattern.compile("\\(");
+        Pattern rightParentheses = Pattern.compile("\\)");
+
+
+        matcher = leftParentheses.matcher(input);
+        while (matcher.find()) {
+            leftParenthesesCounter += 1;
+        }
+
+        matcher = rightParentheses.matcher(input);
+        while (matcher.find()) {
+            rightParenthesesCounter += 1;
+        }
+
+        return leftParenthesesCounter - rightParenthesesCounter;
     }
 }
