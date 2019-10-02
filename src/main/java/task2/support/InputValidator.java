@@ -8,14 +8,14 @@ import java.util.regex.Pattern;
 public class InputValidator {
     public static void validateInput(String input) throws WrongInputException {
         Pattern notAllowedSymbolPattern = Pattern
-                .compile("[^0-9\\.\\(\\)\\*\\/\\+\\-]+|\\.\\.+|\\D\\.|\\.\\D|^\\.");
+                .compile("[^0-9\\.\\(\\)\\*\\/\\+\\-]+|\\.\\.+|\\D\\.|\\.\\D|^\\.|\\)\\(|\\)\\d|\\d\\(");
         Matcher matcher = notAllowedSymbolPattern.matcher(input);
 
         if (matcher.find()) {
             throw new WrongInputException("not allowed symbol: \"" +
                     input.substring(matcher.start(), matcher.end()) + "\"");
         }
-        
+
         if (checkClosedParentheses(input) != 0) {
             throw new WrongInputException(checkClosedParentheses(input) + " open parentheses");
         }
@@ -27,7 +27,6 @@ public class InputValidator {
         Matcher matcher;
         Pattern leftParentheses = Pattern.compile("\\(");
         Pattern rightParentheses = Pattern.compile("\\)");
-
 
         matcher = leftParentheses.matcher(input);
         while (matcher.find()) {
