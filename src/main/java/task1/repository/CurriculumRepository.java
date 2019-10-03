@@ -7,7 +7,9 @@ import java.util.List;
 
 public interface CurriculumRepository {
     void addCurriculum(Curriculum curriculum);
+
     Curriculum getCurriculumById(int id) throws NoEntityException;
+
     List<Curriculum> getCurriculumList();
 
 }

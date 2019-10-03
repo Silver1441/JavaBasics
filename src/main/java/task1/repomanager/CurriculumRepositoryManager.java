@@ -8,6 +8,8 @@ import java.util.Optional;
 
 public interface CurriculumRepositoryManager {
     boolean addCurriculum(Curriculum curriculum);
+
     Optional<Curriculum> getCurriculumById(int id) throws NoEntityException;
+
     List<Curriculum> getCurriculumList();
 }
