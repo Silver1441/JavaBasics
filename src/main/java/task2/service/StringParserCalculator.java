@@ -2,8 +2,8 @@ package task2.service;
 
 import task2.exception.WrongInputException;
 
-import static task2.support.PriorityAssigner.getPriority;
-import static task2.support.inputTrimmer.trimTheInput;
+import static task2.support.PriorityAssigner.*;
+import static task2.support.InputTrimmer.trimTheInput;
 import static task2.support.SeparatedExpressionsBuilder.buildSeparatedExpressions;
 import static task2.service.operation.Summarizer.sumTwoExpressions;
 import static task2.service.operation.Multiplier.multiplyTwoExpressions;
@@ -21,7 +21,6 @@ public class StringParserCalculator {
     private Deque<String> operatorsTemporalStack = new ArrayDeque<>();
     private Deque<Double> calculationStack = new ArrayDeque<>();
     private List<String> separatedExpressionsList;
-
 
     public double makeCalculation(String input) throws WrongInputException {
         input = trimTheInput(input);
@@ -46,21 +45,21 @@ public class StringParserCalculator {
 
     private void allocateExpression(String expression) {
         switch (expression) {
-            case ("*"):
-            case ("/"):
-            case ("+"):
-            case ("-"):
+            case (MULTIPLICATION):
+            case (DIVISION):
+            case (SUM):
+            case (SUBTRACTION):
                 if (operatorsTemporalStack.isEmpty()) {
                     operatorsTemporalStack.addFirst(expression);
                 } else {
                     checkPriorityAndAllocate(expression);
                 }
                 break;
-            case ("("):
+            case (LEFT_PARENTHESIS):
                 operatorsTemporalStack.push(expression);
                 break;
-            case(")"):
-                while(!operatorsTemporalStack.getFirst().equals("(")) {
+            case (RIGHT_PARENTHESIS):
+                while (!operatorsTemporalStack.getFirst().equals(LEFT_PARENTHESIS)) {
                     rpnStack.push(operatorsTemporalStack.pollFirst());
                 }
                 operatorsTemporalStack.pollFirst();
@@ -92,29 +91,29 @@ public class StringParserCalculator {
 
     private void parseExpression(String expression) throws WrongInputException {
         switch (expression) {
-            case ("*"):
-                if (calculationStack.size() >= 2){
+            case (MULTIPLICATION):
+                if (isCalculationStackSizeCorrect()) {
                     calculationStack.push(multiplyTwoExpressions(calculationStack.poll(), calculationStack.poll()));
                 } else {
                     throw new WrongInputException("excess operator");
                 }
                 break;
-            case ("/"):
-                if (calculationStack.size() >= 2){
+            case (DIVISION):
+                if (isCalculationStackSizeCorrect()) {
                     calculationStack.push(divideTwoExpressions(calculationStack.poll(), calculationStack.poll()));
                 } else {
                     throw new WrongInputException("excess operator");
                 }
                 break;
-            case ("+"):
-                if (calculationStack.size() >= 2){
+            case (SUM):
+                if (isCalculationStackSizeCorrect()) {
                     calculationStack.push(sumTwoExpressions(calculationStack.poll(), calculationStack.poll()));
                 } else {
                     throw new WrongInputException("excess operator");
                 }
                 break;
-            case ("-"):
-                if (calculationStack.size() >= 2){
+            case (SUBTRACTION):
+                if (isCalculationStackSizeCorrect()) {
                     calculationStack.push(subtractTwoExpressions(calculationStack.poll(), calculationStack.poll()));
                 } else {
                     throw new WrongInputException("excess operator");
@@ -127,6 +126,10 @@ public class StringParserCalculator {
                 calculationStack.push(Double.parseDouble(expression));
                 break;
         }
+    }
+
+    private boolean isCalculationStackSizeCorrect() {
+        return calculationStack.size() >= 2;
     }
 
 }

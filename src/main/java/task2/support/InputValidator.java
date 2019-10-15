@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class InputValidator {
-    public static void validateInput(String input) throws WrongInputException {
+    public static boolean validateInput(String input) throws WrongInputException {
         Pattern notAllowedSymbolPattern = Pattern
                 .compile("[^0-9\\.\\(\\)\\*\\/\\+\\-]+|\\.\\.+|\\D\\.|\\.\\D|^\\.|\\)\\(|\\)\\d|\\d\\(");
         Matcher matcher = notAllowedSymbolPattern.matcher(input);
@@ -19,6 +19,12 @@ public class InputValidator {
         if (checkClosedParentheses(input) != 0) {
             throw new WrongInputException(checkClosedParentheses(input) + " open parentheses");
         }
+
+        if (input.equals("")) {
+            throw new WrongInputException("input is empty");
+        }
+
+        return true;
     }
 
     private static int checkClosedParentheses(String input) {
