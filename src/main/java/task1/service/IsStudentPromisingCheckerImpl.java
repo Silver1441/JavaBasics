@@ -17,8 +17,8 @@ public class IsStudentPromisingCheckerImpl implements IsStudentPromisingChecker 
         int maxNumberOfMarks = marks.getNumberOfMarks();
         int currentNumberOfMarks = marks.getMarkList().size();
         double averageMark = averageDoubleCalculator.calculateAverageDouble(marks.getMarkList());
-        double potentialAverageMark = ( sumAllMarks(marks.getMarkList()) +
-                ( getMaxMark() * (maxNumberOfMarks - currentNumberOfMarks) ) ) / maxNumberOfMarks;
+        double potentialAverageMark = (sumAllMarks(marks.getMarkList()) +
+                (getMaxMark() * (maxNumberOfMarks - currentNumberOfMarks))) / maxNumberOfMarks;
 
         if (averageMark >= getRequiredAverageMark()) {
             return true;

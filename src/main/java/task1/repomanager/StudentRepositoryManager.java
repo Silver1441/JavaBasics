@@ -8,6 +8,8 @@ import java.util.Optional;
 
 public interface StudentRepositoryManager {
     boolean addStudent(Student student);
+
     List<Student> getStudentList();
+
     Optional<Student> getStudentById(int id) throws NoEntityException;
 }

@@ -10,8 +10,8 @@ public class StudentsRepositoryImpl implements StudentRepository {
     private List<Student> list = new ArrayList<>();
 
     @Override
-    public void addStudent(Student student){
-            list.add(student);
+    public void addStudent(Student student) {
+        list.add(student);
     }
 
     @Override

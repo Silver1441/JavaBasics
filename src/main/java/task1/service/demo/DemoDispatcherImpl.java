@@ -42,12 +42,12 @@ public class DemoDispatcherImpl implements DemoDispatcher {
         List<Curriculum> curriculums = curriculumRepositoryManager.getCurriculumList();
         List<Student> students = studentRepositoryManager.getStudentList();
 
-        for (int i = 0; i < (students.size()/2); i++) {
+        for (int i = 0; i < (students.size() / 2); i++) {
             curriculumParticipantRegistrar.registerStudent(students.get(i), curriculums.get(0));
             mockMarksBuilder.buildMockMarks(students.get(i), curriculums.get(0), markGrader);
         }
 
-        for (int i = (students.size() - 1); i >= (students.size()/2); i--) {
+        for (int i = (students.size() - 1); i >= (students.size() / 2); i--) {
             curriculumParticipantRegistrar.registerStudent(students.get(i), curriculums.get(1));
             mockMarksBuilder.buildMockMarks(students.get(i), curriculums.get(1), markGrader);
         }
