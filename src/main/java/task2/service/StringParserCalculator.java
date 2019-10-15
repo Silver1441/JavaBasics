@@ -2,8 +2,8 @@ package task2.service;
 
 import task2.exception.WrongInputException;
 
-import static task2.support.PriorityAssigner.getPriority;
-import static task2.support.inputTrimmer.trimTheInput;
+import static task2.support.PriorityAssigner.*;
+import static task2.support.InputTrimmer.trimTheInput;
 import static task2.support.SeparatedExpressionsBuilder.buildSeparatedExpressions;
 import static task2.service.operation.Summarizer.sumTwoExpressions;
 import static task2.service.operation.Multiplier.multiplyTwoExpressions;
@@ -21,13 +21,6 @@ public class StringParserCalculator {
     private Deque<String> operatorsTemporalStack = new ArrayDeque<>();
     private Deque<Double> calculationStack = new ArrayDeque<>();
     private List<String> separatedExpressionsList;
-
-    private static final String SUM = "+";
-    private static final String SUBTRACTION = "-";
-    private static final String MULTIPLICATION = "*";
-    private static final String DIVISION = "/";
-    private static final String LEFT_PARENTHESIS = "(";
-    private static final String RIGHT_PARENTHESIS = ")";
 
     public double makeCalculation(String input) throws WrongInputException {
         input = trimTheInput(input);
