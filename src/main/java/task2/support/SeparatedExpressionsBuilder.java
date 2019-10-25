@@ -10,7 +10,7 @@ public class SeparatedExpressionsBuilder {
         List<String> separatedExpressionsList = new ArrayList<>();
 
         Pattern pattern = Pattern
-                .compile("(^\\-\\d+(\\.?\\d*))|\\d+(\\.?\\d*)|\\+|\\*|\\-|\\/|\\(\\-\\d+(\\.?\\d*)\\)|\\)|\\(");
+                .compile("(^\\-\\d+(\\.?\\d*))|\\d+(\\.?\\d*)|\\+|\\*|\\(|\\G\\-\\d+(\\.?\\d*)|\\-|\\/|\\(\\-\\d+(\\.?\\d*)\\)|\\)");
         Matcher matcher = pattern.matcher(input);
 
         while (matcher.find()) {
