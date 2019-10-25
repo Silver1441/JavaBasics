@@ -7,7 +7,7 @@ public class Application {
     public static void main(String[] args) {
 
         StringParserCalculator calc = new StringParserCalculator();
-        String input = "-8.7 - [-1,0 / (2*2,0)] /   (2)";
+        String input = "-8.7 - [(-1,0) / (2*2,0)] /   (2)";
 
         try {
             System.out.println(calc.makeCalculation(input));
